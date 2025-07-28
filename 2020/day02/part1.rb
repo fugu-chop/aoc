@@ -20,7 +20,7 @@ end
 
 def memoise_rule(rule)
   ruleset = rule.split(" ")
-  counts = ruleset[0].split("-").map { |count| count.to_i}
+  counts = ruleset[0].split("-").map(&:to_i)
   letter = ruleset[1]
 
   return {
@@ -29,19 +29,15 @@ def memoise_rule(rule)
 end
 
 def memoise_password(password)
-  memo = {}
   string_pw = password.strip().split("")
 
-  string_pw.each do |letter|
+  return string_pw.each_with_object({}) do |letter, memo|
     if memo[letter] 
       memo[letter]+= 1
     else 
       memo[letter] = 1
     end
-    
   end
-
-  return memo
 end
 
 execute("/Users/dean/Documents/aoc/2020/day02/input.txt")
