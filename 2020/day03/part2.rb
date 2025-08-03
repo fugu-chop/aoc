@@ -1,11 +1,11 @@
 TREE_CHAR = "#"
 LINE_LEN = 31
 INTERVALS = [
-  {1 => 1},
-  {3 => 1},
-  {5 => 1}, 
-  {7 => 1},
-  {1 => 2},
+  [1,1],
+  [3,1],
+  [5,1], 
+  [7,1],
+  [1,2],
 ]
 
 def execute(file_address)
@@ -16,7 +16,7 @@ def execute(file_address)
 
   INTERVALS.each do |entry|
     File.foreach(file_address) do |result|
-      if idx % entry.values[0] != 0
+      if idx % entry[1] != 0
         idx += 1
         next
       end
@@ -27,7 +27,7 @@ def execute(file_address)
         trees_in_run += 1 
       end
 
-      position = calculate_position(position, entry.keys[0])
+      position = calculate_position(position, entry[0])
       idx+=1
     end
 
