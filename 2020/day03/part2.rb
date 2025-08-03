@@ -10,9 +10,7 @@ INTERVALS = [
 
 def execute(file_address)
   trees = []
-  trees_in_run = 0
-  position = 0
-  idx = 0
+  trees_in_run, position, idx = 0, 0, 0
 
   INTERVALS.each do |entry|
     File.foreach(file_address) do |result|
@@ -28,13 +26,12 @@ def execute(file_address)
       end
 
       position = calculate_position(position, entry[0])
-      idx+=1
+
+      idx += 1
     end
 
-    position = 0
     trees << trees_in_run
-    trees_in_run = 0
-    idx = 0
+    position, trees_in_run, idx = 0, 0, 0
   end
 
   puts trees.reduce(1, :*) 
@@ -43,11 +40,11 @@ end
 def calculate_position(position, steps)
   incremented_position = position + steps
 
-  if incremented_position < LINE_LEN
-    return incremented_position
-  else
-    return incremented_position - LINE_LEN
+  if incremented_position >= LINE_LEN
+    incremented_position -= LINE_LEN
   end
+
+  incremented_position
 end
 
 execute("/Users/dean/Documents/aoc/2020/day03/input.txt")
