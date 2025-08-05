@@ -34,7 +34,7 @@ def execute(file_address)
     position, trees_in_run, idx = 0, 0, 0
   end
 
-  puts trees.reduce(:*) 
+  puts trees.reduce(:*)
 end
 
 def calculate_position(position, steps)
