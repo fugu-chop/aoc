@@ -8,14 +8,12 @@ CRITERION = {
   "pid": true,
 }
 
-
 def execute(file_address)
   valid_passports = 0
   all_passports = get_passports(file_address)
   all_passports.each do |passport|
     all_criteria_met = true
     CRITERION.keys.each do |key|
-      next if key.to_s == "cid"
       if !passport.fetch(key.to_s, nil)
         all_criteria_met = false
         break 
