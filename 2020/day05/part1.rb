@@ -17,7 +17,7 @@ def get_seat_id(reference)
   row = get_row(reference)
   col = get_column(reference)
 
-  return row * 8 + col
+  row * 8 + col
 end
 
 def get_column(reference)
@@ -32,8 +32,11 @@ def get_column(reference)
     end
   end
 
-  return cols[1] if refs[2] == RIGHT
-  return cols[0] if refs[2] == LEFT
+  if refs[2] == RIGHT
+    return cols[1] 
+  elsif refs[2] == LEFT
+    return cols[0]
+  end
 end
 
 def get_row(reference)
@@ -49,8 +52,11 @@ def get_row(reference)
     end
   end
 
-  return seat_range[0] if sequence[6] == FRONT
-  return seat_range[1] if sequence[6] == BACK
+  if sequence[6] == FRONT
+    return seat_range[0]
+  elsif sequence[6] == BACK
+    return seat_range[1] 
+  end
 end
 
 def higher_half(range)
